@@ -86,22 +86,18 @@ public class GeradorDeCPF {
 		return false;
 	}
 
-	private String formatarCPF(String cpf) {
-		String numerosFormatado = "";
-		int valor = 0;
-		
-		for (int i = 0; i < cpf.length(); i++) {
-			if (i % 3 == 0 && i != 0) {
-				if (valor < 2) {
-					numerosFormatado += ".";
-					valor++;
-				} else {
-					numerosFormatado += "-";
-				}
-			}
-			numerosFormatado += cpf.charAt(i);
+	private static String inserirMascara(String cpf) {
+		String cpfComMascara = "";
+
+		try {
+		    MaskFormatter mf = new MaskFormatter("###.###.###-##");
+		    mf.setValueContainsLiteralCharacters(false);
+		    cpfComMascara = mf.valueToString(cpf);
+		} catch (Exception ex) {
+		    ex.printStackTrace();
 		}
-		return numerosFormatado;
-	}
+
+		return cpfComMascara;
+    	}
 
 }
